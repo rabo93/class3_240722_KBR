@@ -19,6 +19,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
+		//index 페이지 포워딩
 		return "index";
 	}
 	
