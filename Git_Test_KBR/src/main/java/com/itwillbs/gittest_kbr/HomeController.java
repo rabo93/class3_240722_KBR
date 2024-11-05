@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 //lllll
+//아무거나
 /**
  * Handles requests for the application home page.
  */
@@ -20,6 +21,7 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		//index.jsp 페이지 포워딩
+		// 내꺼 내가 바꿈
 		return "index";
 	}
 	
