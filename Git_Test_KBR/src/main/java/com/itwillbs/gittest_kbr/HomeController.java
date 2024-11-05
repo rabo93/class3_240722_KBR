@@ -20,6 +20,7 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		//index.jsp 페이지 포워딩
+		// 내꺼 내가 바꿈
 		return "index";
 	}
 	
