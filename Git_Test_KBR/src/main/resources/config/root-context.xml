@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<!-- < root-context.xml 설정 > -->
+	<!-- HikariCP 라이브러리 사용을 위한 설정(커넥션풀 설정) -->
+	<!-- 1. HikariCP 를 활용한 DB 접속 정보 설정 위해 HikariConfig 객체 설정(JDBC 기본 설정) -->
+	<!-- com.zaxxer.hikari 패키지의 HikariConfig 클래스 지정 및 속성 설정 -->
+<!-- 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig"> -->
+<!-- 		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property> -->
+<!-- 		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/study_jsp3"></property> -->
+<!-- 		<property name="username" value="root"></property> -->
+<!-- 		<property name="password" value="1234"></property> -->
+<!-- 	</bean> -->
+	
+	<!-- => log4jdbc SQL 로그를 위한 설정 (driverClassName, jdbcUrl 값 변경)-->
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
+		<property name="jdbcUrl" value="jdbc:log4jdbc:mysql://localhost:3306/spring_mvc_board3"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="1234"></property>
+	</bean>
+	
+	
+	<!-- 2. HikariCP 를 통해 커넥션을 관리하는 DataSource 객체(HikariDataSource) 설정 -->
+	<!-- 생성자 파라미터로 1번에서 생성한 HikariConfig 객체 전달 -->
+	<!-- 커넥션 객체 사용 완료 후 자동으로 close() 메서드 호출하여 커넥션풀에 객체 반환하기 위해 -->
+	<!-- bean 태그의 destroy-method 속성값으로 "close" 지정 -->
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+		<constructor-arg ref="hikariConfig"></constructor-arg>
+	</bean>
+	
+	<!-- 3. Connection 객체 생성, 쿼리 전달 및 결과 리턴 등의 작업을 수행할 SQLSession 객체 설정 -->
+	<!-- MyBatis - Spring 연결을 담당하며,SQLSessionFactory 객체 내부적으로 생성되는 SQLSession 객체를 통해 작업 수행 -->
+	<!-- 
+	주의!
+	1. 이전에 이미 DataSource 객체 설정이 완료되어 있어야 함 (위의 1,2번 작업)
+	2. <bean> 태그의 id 값, class 값은 고정
+	3. <property> 태그의 dataSource, configLocation, mapperLocations 이름 고정 
+	   => dataSourse property의 ref속성값으로 2번에서 생성한 객체의 id값 지정
+	4. configLocation, mapperLocations 속성(항목)에 지정된 각각의 파일(xml)이 실제 위치에 생성되어 있어야 함
+	   (설정 항목 중 classpath 가 가리키는 기본 위치 : src/main/resources 패키지)
+	-->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="configLocation" value="classpath:/config/mybatis-config.xml"></property>
+		<property name="mapperLocations" value="classpath:/com/itwillbs/gittest_kbr/mapper/*Mapper.xml"></property>
+	</bean>
+	
+	<!-- 4. MyBatis 연동에 사용될 객체(클래스)들의 패키지 위치 지정(기본 루트 패키지 지정) -->
+	<mybatis-spring:scan base-package="com.itwillbs.gittest_kbr"/>
+		
+	<!-- =========================================================================================== -->
+	<!-- 5. 트랜잭션 설정 -->
+	<!-- 5-1) <bean> 태그를 사용하여 DataSourceTransactionManager 객체 설정 -->
+	<!-- id 속성값 "transactionManager" 고정 -->
+	<!-- class 속성값 "org.springframework.jdbc.datasource.DataSourceTransactionManager" 클래스 지정 -->
+	<!-- bean 태그 내부에 property 태그에 2번 과정에서 생성한 DataSource 객체의 id 속성값 지정 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<!-- 5-2) <tx:annotation-driven> 태그를 통해 5-1 과정에서 생성한 트랜잭션 관리 객체 지정 -->
+	<!-- namespaces 탭에서 tx 항목 추가 필요 -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	
+	
+	
+</beans>

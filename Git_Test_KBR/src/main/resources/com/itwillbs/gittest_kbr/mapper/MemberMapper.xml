@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.itwillbs.gittest_kbr.mapper.MemberMapper">
+	<!-- 
+	[회원가입 - INSERT]
+	- 회원번호(idx) 컬럼은 자동증가(AUTO_INCREMENT) 컬럼이므로 null값 전달시 컬럼값 자동증가
+	- 이메일(email) 컬럼은 email1, email2 값으로 전달되었을 경우 문자열 결합 후 전달 - CONCAT() 함수 활용
+	  만약, 자바스크립트를 통해 email 파라미터로 결합하여 전달되었을 경우 그대로 사용
+	- 가입일자(reg_date) 컬럼은 현재 시스템(DB)의 날짜 및 시각 활용 => NOW() 함수 활용
+	- 탈퇴일자(withdraw_date) 컬럼은 기본값 null값 전달(NN 제약 조건 없음)
+	- 회원상태(member_status) 컬럼은 기본값 1 전달 (정상회원)
+	- 메일인증상태(mail_auth_status) 컬럼은 기본값 'N' 전달 (이메일 미인증)
+	
+	 -->
+	<insert id="insertMember">
+		Insert INTO member
+		VALUES (
+			null					-- 번호(idx) 자동 증가
+		 	,#{name}
+		 	,#{id}
+		 	,#{passwd}
+		 	,#{post_code}
+		 	,#{address1}
+		 	,#{address2}
+<!-- 		 	,#{email} --> 	  <!-- email1, email2 를 결합하여 전달받았을 경우 -->
+		 	, CONCAT(#{email1}, '@', #{email2})  -- 이메일주소(email1, email2 문자열 결합)
+		 	,#{job}
+		 	,#{gender}
+		 	,#{hobby}
+		 	,#{motivation}
+		 	,NOW()					-- 가입일자(reg_date)는 현재 시스템 날짜 및 시각 사용
+		 	,null					-- 탈퇴일자(withdraw_date) 기본값 null
+		 	,1						-- 회원상태(member_status) 기본값 1
+		 	,'N'					-- 메일인증상태(mail_auth_status) 기본값 'N'
+		)
+	</insert>
+	
+	
+	<!-- 회원 아이디에 대한 패스워드 조회 - select -->
+	<select id="selectMemberPasswd" resultType="String">
+		select passwd
+		from member
+		where id = #{id}
+	</select>
+	
+	
+	<!-- 회원 상세정보 조회 - select -->
+<!-- <select id="selectMember" resultType="com.itwillbs.mvc_board.vo.MemberVO"> 
+											-> mybatis-config.xml에 설정 -->
+	<select id="selectMember" resultType="member">
+		select *
+		from member
+		where id = #{id}
+	</select>
+	
+	<!-- 회원 아이디가 일치하는 레코드 수정 - update -->
+	<update id="updateMember">
+		update member
+		set  name = #{name}
+			<!-- 새 패스워드(passwd) 존재여부에 따라 passwd 컬럼 UPDATE 여부가 결정되어야 함 -->
+			<!-- 새 패스워드가 존재할 경우(=널스트링이 아님) passwd컬럼 수정 문장을 set절에 추가 => if 필요 -->
+			<if test="!passwd.equals('')">
+				,passwd = #{passwd}
+			</if>
+		 	,post_code = #{post_code}
+		 	,address1 = #{address1}
+		 	,address2 = #{address2}
+		 	,email = #{email} 
+		 	,job = #{job}
+		 	,gender = #{gender}
+		 	,hobby = #{hobby}
+		 	,motivation = #{motivation}
+		where id = #{id}
+	</update>
+	
+	
+	<!--  회원 상태(정상, 휴면, 탈퇴) 수정 - UPDATE  -->
+	<!--  전달받은 아이디에 해당하는 member_status 컬럼값을 전달받은 member_status 값으로 설정  -->
+	<!--  탈퇴일자(withdraw_date)는 현재 시스템의 시각 정보 활용 => Now() -->
+	<update id="updateMemberStatus">
+		update member
+		set  member_status = #{member_status}
+			,withdraw_date = NOW()
+		where id = #{id}
+	</update>
+	
+	
+	
+</mapper>

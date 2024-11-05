@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<!-- 
+	Mapper XML 파일에서 데이터타입 지정 시 사용자 정의 클래스는 패키지명.클래스명 형태로 지정하는데
+	이를 줄여서 사용하기 위해 마이바티스의 설정 파일 내에 <configuration> 태그에서
+	<typeAliases></typeAliases> 태그를 정의하고 해당 태그 사이에
+	<typeAlias /> 태그를 통해 특정 타입에 대한 별칭(약자)을 설정할 수 있다!
+	=> 설정된 별칭은 Mapper XML 파일에서 resultType 속성 등에서 간략한 이름으로 대체 가능함
+	=> 또한, <package> 태그를 통해 패키지명만 별칭으로 작성도 가능함
+	
+	기본 문법 : <typeAlias type="실제 클래스타입(패키지명 포함)" alias="별칭" />
+	 -->
+	<typeAliases>
+		<typeAlias type="com.itwillbs.gittest_kbr.vo.MemberVO" alias="member"/>	
+		<typeAlias type="com.itwillbs.gittest_kbr.vo.BoardVO" alias="board"/>	
+	</typeAliases>
+</configuration>
