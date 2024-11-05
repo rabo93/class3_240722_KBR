@@ -8,8 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-// 충돌 테스트 맨위에 넣고 있습니다. 
-// 충돌 테스트 두번째
+//보라-수정자리!!!!!!!!!!!!!!
+//한번더
 /**
  * Handles requests for the application home page.
  */
