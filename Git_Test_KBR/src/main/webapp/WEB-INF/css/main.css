@@ -1,0 +1,85 @@
+@charset "UTF-8";
+
+
+
+/************* section ************/
+.sec { width:100%; padding: 2rem 1rem; } 
+.sec .sec-inner {max-width:1320px;margin:0 auto;}
+.sec-full {width:100%;padding:0;}
+.sec-ttl { font-size: 1.6rem; margin: 1rem 0; display:flex;align-items:center;}
+.sec-ttl.center {text-align:center;justify-content: center;}
+.sec-ttl .more {background:none;font-size:1.2rem;width:2rem;}
+.sec-desc {font-size:1rem;color:var(--gray);text-align:center;margin:1rem 0;}
+
+/* section01 */
+#sec01 {width:100%;overflow: hidden;}
+#sec01 .sec-inner {width: 100%;position:relative;padding-bottom: 4rem;}
+.visual-area {width:100%;position:relative;z-index: 990;}
+.visual-area .main-visual {width:100%;overflow: hidden;}
+.visual-area .main-visual .slick-slide {width:100%;float:left;display: block;}
+.visual-area .main-visual .slick-slide img {width: 100%;}
+.visual-area .main-visual .slick-dots {position:absolute;bottom: 24px;width: 100%;text-align: center;}
+.visual-area .main-visual .slick-dots li {display:inline-block;padding:5px;}
+.visual-area .main-visual .slick-dots li button {border:0;background:rgba(134, 152, 182, 0.8);width: 10px;height: 10px;font-size:0;border-radius: 100%;}
+.visual-area .main-visual .slick-dots li.slick-active button {background:var(--primary);}
+.visual-area .slick-arrow {position:absolute;display:block;width: 80px;height: 80px;top:50%;margin-top:-50px;transition:all 0.2s !important;z-index: 990;text-align: center;line-height: 80px;font-size: 30px;}
+.visual-area .slick-arrow.visu-prev {left: 0;opacity:0.3;}
+.visual-area .slick-arrow.visu-next {right: 0;opacity:0.3;}
+.visual-area .slick-arrow.visu-prev:hover {opacity:0.9;}
+.visual-area .slick-arrow.visu-next:hover {opacity:0.9;}
+
+@media screen and (max-width:960px){
+    .visual-area .main-visual {height:340px;}
+    .visual-area .main-visual .slick-slide {height:340px;}
+    .visual-area .main-visual .slick-slide img {width:auto;height: 340px;object-fit:cover;}
+    .visual-area .slick-arrow {width:40px;height:40px;font-size: 20px;}
+    .visual-area .main-visual .slick-dots {bottom:1rem;}
+    .visual-area .main-visual .slick-dots li button {width:8px;height:8px;}
+
+    #sec01 .sec-inner {padding-bottom:0;}
+}
+
+@media screen and (max-width:480px){
+    .visual-area .main-visual {height:260px;}
+    .visual-area .main-visual .slick-slide {height:260px;}
+    .visual-area .main-visual .slick-slide img {height: 260px;}
+}
+
+/* section02 */
+.course-card {display: grid;-webkit-column-gap: 1rem;column-gap: 1rem;row-gap: 1rem;grid-template-columns: repeat(4, minmax(0, 1fr));} 
+.course-card .card-thumb { display: block; object-fit: fill; border: 1px solid var(--light-gray); border-radius:1rem;} 
+.course-card .card-info {padding: 0.8rem 0.4rem;}
+.course-card .card-info .category span {border-radius:50px;background:var(--light-gray);color:var(--dark);display:inline-block;padding: 0.1rem 0.8rem;border:1px solid var(--gray);font-size: 0.75rem;font-weight: 700;}
+.course-card .card-info .ttl {font-size: 1.2rem;font-weight:600;margin:0.6rem 0;line-height: 1.2;text-overflow: ellipsis;overflow: hidden;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;}
+.course-card .card-info .price {margin-bottom:0.6rem;}
+.course-card .card-info .rating {margin-bottom:0.5rem;font-size:0.875rem;}
+.course-card .card-info .rating i {color:var(--yellow);}
+.course-card .card-info .rating span {font-weight:700;color:var(--dark);}
+.course-card .card-info .name {font-size: 0.8rem;color:var(--gray);}
+.btn-more {padding:0.8rem 3rem;font-size:1rem;border-radius:50px;margin:1rem auto;display:block;border:1px solid var(--light-gray);}
+
+/* section05 */
+.imsi {width:100%;height:250px;background:var(--primary)}
+
+/* section06 */
+.cate-list {margin:2rem auto; padding:0 1rem;}
+.cate-list ul {display:flex;align-items:center;justify-content: center;flex-wrap: wrap;gap:1rem 2rem;}
+.cate-list ul li a {display:block;padding:0.8rem 4rem;border-radius:50px;border: 1px solid #ddd;background:var(--white);font-size:1rem;color:var(--dark);box-shadow:0 0 3px rgba(0,0,0,0.1);}
+
+@media screen and (max-width:1023px){
+    .course-card {grid-template-columns: repeat(3, minmax(0, 1fr));}
+}
+
+@media screen and (max-width:960px){
+    .cate-list {padding:0;;}
+    .cate-list ul {gap:0.5rem 0.3rem;}
+    .cate-list ul li a {padding:0.5rem 2rem; font-size:0.8rem;}
+}
+
+@media screen and (max-width:560px){
+    html {font-size:14px;}
+    .course-card {grid-template-columns: repeat(2, minmax(0, 1fr));}
+    .cate-list ul {gap:0.6rem;}
+    .cate-list ul li a {font-size:0.9rem;padding:0.8rem 1rem;}
+}
+

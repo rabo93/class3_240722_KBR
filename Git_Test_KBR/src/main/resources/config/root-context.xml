@@ -23,8 +23,12 @@
 	<!-- => log4jdbc SQL 로그를 위한 설정 (driverClassName, jdbcUrl 값 변경)-->
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
-		<property name="jdbcUrl" value="jdbc:log4jdbc:mysql://localhost:3306/spring_mvc_board3"></property>
-		<property name="username" value="root"></property>
+<!-- 		<property name="jdbcUrl" value="jdbc:log4jdbc:mysql://localhost:3306/spring_mvc_board3"></property> -->
+<!-- 		<property name="username" value="root"></property> -->
+<!-- 		<property name="password" value="1234"></property> -->
+	<!-- 아이티윌 프로젝트 서버의 DB정보로 변경 -->
+		<property name="jdbcUrl" value="jdbc:log4jdbc:mysql://itwillbs.com:3306/c3d2407t1p1"></property>
+		<property name="username" value="c3d2407t1p1"></property>
 		<property name="password" value="1234"></property>
 	</bean>
 	

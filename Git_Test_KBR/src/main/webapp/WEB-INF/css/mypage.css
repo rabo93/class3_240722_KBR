@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+.page-ttl {max-width: 1320px;margin: 2rem auto 1rem;color:var(--dark);padding: 0 1rem;font-size: 1.4rem;text-indent: 0.875rem;}
+
+/* mypage layout */
+.my-wrap {max-width: 1320px;margin: 0 auto 2rem;display: flex;padding: 0 1rem;align-items: flex-start;}
+.my-menu {width: 240px;background: var(--gray);padding: 1rem;border-radius: 8px;flex: 0 0 240px;}
+.my-menu a {display: block;padding: 0.4rem 1rem;margin: 0.5rem 0;color: var(--white);font-weight: 500;font-size: 0.875rem;transition: all 0.3s;}
+.my-menu a:hover ,
+.my-menu a.active {background: var(--dark); padding: 0.8rem 1rem; border-radius: 4px;font-weight: 700;}
+.my-container{margin-left: 1rem;padding: 2rem;background: var(--milk);flex: 1 1 auto;min-height: 400px;border-radius: 8px;}
+.my-container .contents-ttl {font-size:1.2rem;font-weight:700;margin-bottom:1rem;color:var(--dark);}
+
+
+/* 계정설정 */
+.my-frm {}
+.my-frm .set {margin: 0.4rem 0;padding: 1rem;border-bottom: 1px solid var(--light-gray);}
+.my-frm .set label {font-weight: 700;font-size: 0.875rem;color: var(--gray);margin-bottom: 0.6rem;display: block;}
+.my-frm .set label span {color:var(--danger);}
+.my-frm .set input[type="text"],
+.my-frm .set input[type="password"] {padding: 0px 10px;background:var(--white);border:1px solid #ddd;border-radius:4px;height: 36px;}
+.my-frm .set .profile-thumb {width: 80px;height: 80px;border-radius: 6px;border: 1px solid var(--light-gray);}
+.my-frm .set .btn-frm {background: var(--white);color: var(--gray);padding: 0 2rem;border-radius:4px;font-size: 0.875rem;border: 1px solid #ddd;font-weight: 600;height: 36px;cursor: pointer;}
+.my-frm .set > div {display:flex;flex-wrap:wrap;gap: 0.2rem;margin: 0.2rem 0;align-items: center;}
+.my-frm .set > div > input[type="text"], .my-frm .set > div > input[type="password"] {flex:1 1 auto;}
+.my-frm .set .ip-tips {text-align:left;display:block;font-size: 11px;padding:0.4rem;color:var(--danger);font-weight: 600;}
+.my-frm .btns {text-align:center;padding:1rem 0;}
+.my-frm .set .sel-frm {background: var(--white);border:0;color: var(--gray);padding: 0 1rem;border-radius:4px;font-size: 0.875rem;border: 1px solid #ddd;font-weight: 600;height: 36px;}
+.my-frm .btns .btn-submit  {background: var(--primary);border:0;color: var(--white);padding: 0 2rem;border-radius:4px;font-size: 1rem;border: 1px solid var(--milk);font-weight: 700;height: 40px;min-width: 150px;}
+.withdraw-link {font-size: 0.875rem;color: var(--gray);text-align:right;display: block;margin-top: 2rem;margin-left: auto;width: 60px;}
+
+
+
+
+
+
+
+
